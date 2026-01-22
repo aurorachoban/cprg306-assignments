@@ -5,7 +5,7 @@ export default function StudentInfo() {
         <div>
             <h2> Name: Aurora Choban </h2>
             <p> 
-                <Link href=""
+                Github: <Link href="https://github.com/aurorachoban/cprg306-assignments" className="underline"> aurorachoban/cprg306-assignments </Link>
             </p>
         </div>
     );
