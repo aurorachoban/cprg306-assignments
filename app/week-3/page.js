@@ -1,12 +1,21 @@
+import HomeButton from "../components/HomeButton";
 import GroceryItemList from "./GroceryItemList";
+
+export const metadata = {
+  title: "Shopping List",
+};
 
 export default function Page() {
   return (
+    <>
+      <HomeButton /> 
+
     <main className="flex flex-col items-center text-center justify-center">
-      <h1 className="text-3xl font-bold text-pink-300 text-center p-4">
+      <h1 className="text-2xl font-bold text-pink-400 text-center p-6">
         Shopping List
       </h1>
       <GroceryItemList />
     </main>
+    </>
   );
 }
