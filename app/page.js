@@ -11,16 +11,20 @@ export default function Home() {
 
          <nav className="flex gap-4 p-2 text-center justify-center">
         <p>
-          <Link href="/week-2" 
-            target= "_none" 
+          <Link href="/week-2"  
             className="text-pink-400 dark:text-pink-300 hover:text-pink-300 dark:hover:text-white hover:font-bold hover:underline">
               Week 2 </Link>
         </p>
         <p>
           <Link href="/week-3" 
-            target= "_none" 
             className="text-pink-400 dark:text-pink-300 hover:text-pink-300 dark:hover:text-white hover:font-bold hover:underline">
               Week 3 </Link>
+        </p>
+
+        <p>
+          <Link href="/week-4" 
+            className="text-pink-400 dark:text-pink-300 hover:text-pink-300 dark:hover:text-white hover:font-bold hover:underline">
+              Week 4 </Link>
         </p>
       </nav>
     </>
