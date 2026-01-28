@@ -1,5 +1,5 @@
-## Project Title
-CPRG306-C Weekly Assignments
+## CPRG306-C Weekly Assignments
+
 
 ## Description
 Weekly assignments for CPRG306 class
