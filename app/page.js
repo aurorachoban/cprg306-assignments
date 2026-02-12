@@ -26,6 +26,12 @@ export default function Home() {
             className="text-pink-400 dark:text-pink-300 hover:text-pink-300 dark:hover:text-white hover:font-bold hover:underline">
               Week 4 </Link>
         </p>
+
+        <p>
+          <Link href="/week-5" 
+            className="text-pink-400 dark:text-pink-300 hover:text-pink-300 dark:hover:text-white hover:font-bold hover:underline">
+              Week 5 </Link>
+        </p>
       </nav>
     </>
   );
