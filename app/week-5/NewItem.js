@@ -71,7 +71,7 @@ return (
                     min="1"
                     max="99"
                     value={quantity}
-                    onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
+                    onChange={(e) => setQuantity(Number(e.target.value))}
                     className="w-full border-2 border-gray-300 dark:border-gray-600 rounded-lg p-3 text-gray-900 dark:text-white dark:bg-gray-700 focus:outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-300"
                     required
                 />
@@ -88,17 +88,17 @@ return (
                         onChange={(e) => setCategory(e.target.value)}
                         className="w-full border-2 border-gray-300 dark:border-gray-600 rounded-lg p-3 text-gray-900 dark:text-white dark:bg-gray-700 focus:outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-300 cursor-pointer"
                     >
-                        <option value="Produce">Produce</option>
-                        <option value="Dairy">Dairy</option>
-                        <option value="Bakery">Bakery</option>
-                        <option value="Meat">Meat</option>
-                        <option value="Frozen Foods">Frozen Foods</option>
-                        <option value="Canned Goods">Canned Goods</option>
-                        <option value="Dry Goods">Dry Goods</option>
-                        <option value="Beverages">Beverages</option>
-                        <option value="Snacks">Snacks</option>
-                        <option value="Household">Household</option>
-                        <option value="Other">Other</option>
+                        <option value="produce">Produce</option>
+                        <option value="dairy">Dairy</option>
+                        <option value="bakery">Bakery</option>
+                        <option value="meat">Meat</option>
+                        <option value="frozen foods">Frozen Foods</option>
+                        <option value="canned goods">Canned Goods</option>
+                        <option value="dry goods">Dry Goods</option>
+                        <option value="beverages">Beverages</option>
+                        <option value="snacks">Snacks</option>
+                        <option value="household">Household</option>
+                        <option value="other">Other</option>
                     </select>
                 </div>
             </div>
