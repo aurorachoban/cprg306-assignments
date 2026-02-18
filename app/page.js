@@ -50,6 +50,16 @@ export default function Home() {
             Week 5
           </h2>
         </Link>
+
+        <Link 
+          href="/week-6"
+          className="bg-white dark:bg-gray-800 border-2 border-pink-400 rounded-lg p-8 text-center hover:bg-pink-50 dark:hover:bg-gray-700 hover:scale-105 transition transform shadow-lg"
+        >
+          <h2 className="text-3xl font-bold text-pink-400 dark:text-pink-300">
+            Week 6
+          </h2>
+        </Link>
+        
       </div>
     </main>
   );
