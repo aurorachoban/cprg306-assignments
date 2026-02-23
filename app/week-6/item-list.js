@@ -1,35 +1,87 @@
+"use client";
+
+import { useState } from "react";
 import Item from './item';
-import items from './items.json';
 
-export default function ItemList() {
-    const groupedItems = items.reduce((acc, item) => {
-        const category = item.category;
-        if (!acc[category]) {
-            acc[category] = [];
+export default function ItemList({ items }) {
+    const [sortBy, setSortBy] = useState("name");
+
+    const renderItems = () => {
+        if (sortBy === "category") {
+            const grouped = [...items]
+                .sort((a, b) => a.category.localeCompare(b.category))
+                .reduce((acc, item) => {
+                    if (!acc[item.category]) acc[item.category] = [];
+                    acc[item.category].push(item);
+                    return acc;
+                }, {});
+
+            return Object.keys(grouped)
+                .sort()
+                .map((category) => (
+                    <div key={category} className="mb-6">
+                        <h2 className="text-xl font-bold capitalize mb-2 text-pink-400 dark:text-pink-300">
+                            {category}
+                        </h2>
+                        <ul className="space-y-2">
+                            {grouped[category]
+                                .sort((a, b) => a.name.localeCompare(b.name))
+                                .map((item) => (
+                                    <Item
+                                        key={item.id}
+                                        name={item.name}
+                                        quantity={item.quantity}
+                                        category={item.category}
+                                    />
+                                ))}
+                        </ul>
+                    </div>
+                ));
         }
-        acc[category].push(item);
-        return acc;
-    }, {});
 
-const sortedCategories = Object.keys(groupedItems).sort();
+    const sortedItems = [...items].sort((a, b) => {
+        if (sortBy === "quantity") return a.quantity - b.quantity;
+        return a[sortBy].localeCompare(b[sortBy]);
+    });
 
-  return (
-    <div>
-      {sortedCategories.map((category) => (
-        <div key={category} className=" mb-6">
-          <h2 className="text-xl font-bold capitalize mb-2 text-indigo-400 dark:text-indigo-200">{category}</h2>
-          <ul className="space-y-2">
-            {groupedItems[category].map((item) => (
-              <Item
-                key={item.id}
-                name={item.name}
-                quantity={item.quantity}
-                category={item.category}
-              />
+    return (
+        <ul className="space-y-2">
+            {sortedItems.map((item) => (
+                <Item
+                    key={item.id}
+                    name={item.name}
+                    quantity={item.quantity}
+                    category={item.category}
+                />
             ))}
-          </ul>
+        </ul>
+    );
+    };
+
+    const buttonClass = (mode) =>
+        `px-4 py-2 rounded-lg font-semibold transition duration-200 ${
+            sortBy === mode
+                ? "bg-pink-500 text-white"
+                : "bg-pink-200 text-pink-800 hover:bg-pink-300"
+        }`;
+
+    return (
+        <div>
+            {/* Sort Buttons */}
+            <div className="flex gap-3 mb-6">
+                <button onClick={() => setSortBy("name")} className={buttonClass("name")}>
+                    Sort by Name
+                </button>
+                <button onClick={() => setSortBy("category")} className={buttonClass("category")}>
+                    Group by Category
+                </button>
+                <button onClick={() => setSortBy("quantity")} className={buttonClass("quantity")}>
+                    Sort by Quantity
+                </button>
+            </div>
+
+            {/* Item List */}
+            {renderItems()}
         </div>
-      ))}
-    </div>
-  );
+    );
 }

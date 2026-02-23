@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function NewItem() {
+export default function NewItem({ onAddItem }) {
     // Initialize state variables
     const [name, setName] = useState("");
     const [quantity, setQuantity] = useState(1);
@@ -15,17 +15,14 @@ export default function NewItem() {
 
     // Create item object
         const item = {
+            id: crypto.randomUUID(),
             name: name,
             quantity: quantity,
             category: category
         };
-        console.log(item);
-    
 
-    // Display user feedback
-    alert(`Added ${quantity} ${name}(s) to the ${category} category!`);
+        onAddItem(item);
 
-    // Reset form fields
     setName("");
     setQuantity(1);
     setCategory("produce");
