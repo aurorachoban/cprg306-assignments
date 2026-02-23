@@ -65,7 +65,7 @@ export default function ItemList({ items }) {
 
     return (
         <div>
-            <div className="max-w-md mx-auto">
+            <div className="mt-6 w-full">
                 <button onClick={() => setSortBy("name")} className={buttonClass("name")}>
                     Sort by Name
                 </button>
