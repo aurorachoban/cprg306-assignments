@@ -9,7 +9,6 @@ export default function ItemList({ items }) {
     const renderItems = () => {
         if (sortBy === "category") {
             const grouped = [...items]
-                .sort((a, b) => a.category.localeCompare(b.category))
                 .reduce((acc, item) => {
                     if (!acc[item.category]) acc[item.category] = [];
                     acc[item.category].push(item);
@@ -39,23 +38,22 @@ export default function ItemList({ items }) {
                 ));
         }
 
-    const sortedItems = [...items].sort((a, b) => {
-        if (sortBy === "quantity") return a.quantity - b.quantity;
-        return a[sortBy].localeCompare(b[sortBy]);
-    });
+        const sortedItems = [...items].sort((a, b) =>
+            a.name.localeCompare(b.name)
+        );
 
-    return (
-        <ul className="space-y-2">
-            {sortedItems.map((item) => (
-                <Item
-                    key={item.id}
-                    name={item.name}
-                    quantity={item.quantity}
-                    category={item.category}
-                />
-            ))}
-        </ul>
-    );
+        return (
+            <ul className="space-y-2">
+                {sortedItems.map((item) => (
+                    <Item
+                        key={item.id}
+                        name={item.name}
+                        quantity={item.quantity}
+                        category={item.category}
+                    />
+                ))}
+            </ul>
+        );
     };
 
     const buttonClass = (mode) =>
@@ -67,20 +65,15 @@ export default function ItemList({ items }) {
 
     return (
         <div>
-            {/* Sort Buttons */}
-            <div className="flex gap-3 mb-6">
+            <div className="max-w-md mx-auto">
                 <button onClick={() => setSortBy("name")} className={buttonClass("name")}>
                     Sort by Name
                 </button>
                 <button onClick={() => setSortBy("category")} className={buttonClass("category")}>
                     Group by Category
                 </button>
-                <button onClick={() => setSortBy("quantity")} className={buttonClass("quantity")}>
-                    Sort by Quantity
-                </button>
             </div>
 
-            {/* Item List */}
             {renderItems()}
         </div>
     );
