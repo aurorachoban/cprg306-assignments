@@ -6,7 +6,7 @@ import { useUserAuth } from "../../contexts/AuthContext";
 import ItemList from "../item-list";
 import NewItem from "../NewItem";
 import MealIdeas from "../MealIdeas";
-import itemsData from "../items.json";
+import itemsData from "./items.json";
 
 export default function Page() {
     const { user } = useUserAuth();
