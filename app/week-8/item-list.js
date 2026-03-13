@@ -1,41 +1,82 @@
 "use client";
 
 import { useState } from "react";
-import ItemList from "./item-list";
-import NewItem from "./NewItem";
-import MealIdeas from "./MealIdeas";
-import itemsData from "./items.json";
+import Item from './item';
 
-export default function Page() {
-    const [items, setItems] = useState(itemsData);
-    const [selectedItemName, setSelectedItemName] = useState("");
+export default function ItemList({ items, onItemSelect }) {
+    const [sortBy, setSortBy] = useState("name");
 
-    const handleAddItem = (newItem) => {
-        setItems([...items, newItem]);
+    const renderItems = () => {
+        if (sortBy === "category") {
+            const grouped = [...items]
+                .reduce((acc, item) => {
+                    if (!acc[item.category]) acc[item.category] = [];
+                    acc[item.category].push(item);
+                    return acc;
+                }, {});
+
+            return Object.keys(grouped)
+                .sort()
+                .map((category) => (
+                    <div key={category} className="mb-6">
+                        <h2 className="text-xl font-bold capitalize mb-2 text-pink-400 dark:text-pink-300">
+                            {category}
+                        </h2>
+                        <ul className="space-y-2">
+                            {grouped[category]
+                                .sort((a, b) => a.name.localeCompare(b.name))
+                                .map((item) => (
+                                    <Item
+                                        key={item.id}
+                                        name={item.name}
+                                        quantity={item.quantity}
+                                        category={item.category}
+                                        onSelect={() => onItemSelect(item)}
+                                    />
+                                ))}
+                        </ul>
+                    </div>
+                ));
+        }
+
+        const sortedItems = [...items].sort((a, b) =>
+            a.name.localeCompare(b.name)
+        );
+
+        return (
+            <ul className="space-y-2">
+                {sortedItems.map((item) => (
+                    <Item
+                        key={item.id}
+                        name={item.name}
+                        quantity={item.quantity}
+                        category={item.category}
+                        onSelect={() => onItemSelect(item)}
+                    />
+                ))}
+            </ul>
+        );
     };
 
-    const handleItemSelect = (item) => {
-        const cleanedName = item.name
-            .split(",")[0]
-            .replace(/[^\p{L}\p{N}\s]/gu, "")
-            .trim();
-        setSelectedItemName(cleanedName);
-    };
+    const buttonClass = (mode) =>
+        `px-4 py-2 rounded-lg font-semibold transition duration-200 ${
+            sortBy === mode
+                ? "bg-pink-500 text-white"
+                : "bg-pink-200 text-pink-800 hover:bg-pink-300"
+        }`;
 
     return (
-        <main className="flex flex-col items-center justify-center p-8">
-            <h1 className="text-2xl font-bold text-pink-400 text-center p-6">
-                Shopping List
-            </h1>
-            <div className="flex gap-8 w-full max-w-5xl items-start">
-                <div className="flex flex-col gap-8 flex-1">
-                    <NewItem onAddItem={handleAddItem} />
-                    <ItemList items={items} onItemSelect={handleItemSelect} />
-                </div>
-                <div className="flex-1">
-                    <MealIdeas ingredient={selectedItemName} />
-                </div>
+        <div>
+            <div className="flex gap-4 mb-6">
+                <button onClick={() => setSortBy("name")} className={buttonClass("name")}>
+                    Sort by Name
+                </button>
+                <button onClick={() => setSortBy("category")} className={buttonClass("category")}>
+                    Group by Category
+                </button>
             </div>
-        </main>
+
+            {renderItems()}
+        </div>
     );
 }
