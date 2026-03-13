@@ -27,12 +27,9 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`} 
       >
         <Navigation />
+         return <AuthContextProvider>{children}</AuthContextProvider>;
         {children}
       </body>
     </html>
   );
-}
-
-export default function Layout({ children }) {
-  return <AuthContextProvider>{children}</AuthContextProvider>;
 }
