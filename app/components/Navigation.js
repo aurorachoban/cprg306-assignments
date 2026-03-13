@@ -51,6 +51,12 @@ export default function Navigation() {
                         >
                             Week 7
                         </Link>
+                        <Link 
+                            href="/week-8" 
+                            className="text-white dark:text-black hover:text-black dark:hover:text-white hover:font-bold transition"
+                        >
+                            Week 8
+                        </Link>
                     </div>
                 </div>
             </div>
