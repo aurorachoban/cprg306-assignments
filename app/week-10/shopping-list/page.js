@@ -7,7 +7,7 @@ import { useUserAuth } from "../../contexts/AuthContext";
 import ItemList from "./item-list";
 import NewItem from "./NewItem";
 import MealIdeas from "./MealIdeas";
-import { getItems, addItem } from "./_services/shopping-list-service";
+import { getItems, addItem } from "../_services/shopping-list-service";
 
 
 export default function Page() {
