@@ -1,7 +1,7 @@
 import { db } from "../../utils/firebase";
-import { collection, getDocs, addDoc, query } from "firebase/firestore";
+import { collection, getDocs, addDoc } from "firebase/firestore";
 
-async function getItems(userId) {
+export async function getItems(userId) {
   const itemsRef = db.collection("users").doc(userId).collection("items");
   const snapshot = await itemsRef.get();
   const items = [];
@@ -11,7 +11,7 @@ async function getItems(userId) {
   return items;
 }
 
-async function addItem(userId, item) {
+export async function addItem(userId, item) {
   const itemsRef = db.collection("users").doc(userId).collection("items");
   const docRef = await itemsRef.add(item);
   return docRef.id;
