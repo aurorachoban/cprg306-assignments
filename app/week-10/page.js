@@ -34,7 +34,7 @@ export default function Page() {
                         Welcome, <span className="font-bold text-pink-400">{user.displayName}</span> ({user.email})
                     </p>
                     <Link
-                        href="/week-9/shopping-list"
+                        href="/week-10/shopping-list"
                         className="w-full text-center bg-pink-400 text-white text-lg font-bold py-3 px-6 rounded-lg hover:bg-pink-300 transition duration-200 shadow-lg"
                     >
                         Go to Shopping List
