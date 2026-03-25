@@ -11,7 +11,6 @@ export default function NewItem({ onAddItem }) {
         event.preventDefault();
 
         const item = {
-            id: Math.random().toString(36).substring(2, 9),
             name: name,
             quantity: quantity,
             category: category
